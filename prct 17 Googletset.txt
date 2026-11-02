@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Selenium Test Suite">
+
+    <test name="Google Test">
+
+        <classes>
+            <class name="seleniumtest.GoogleTset"/>
+        </classes>
+
+    </test>
+
+</suite>
+
