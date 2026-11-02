@@ -1,0 +1,100 @@
+Selenium Grid Configuration and Remote Execution
+Aim: To configure Selenium Server using Hub-Node architecture and execute test scripts using RemoteWebDriver.
+
+Software Requirements:
+1. Eclipse IDE
+2. Java JDK
+3. Maven Project
+4. Selenium Server 4.51.0
+5. Google Chrome Browser
+1. Procedure
+1. Open Eclipse IDE.
+2. Create a new Maven Project named SeleniumGrid.
+3. Add Selenium dependency in the pom.xml file.
+4. Update Maven Project to download Selenium libraries.
+5. Download Selenium Server JAR file.
+6. Start Selenium Hub using Command Prompt.
+7. Start Selenium Node using another Command Prompt.
+8. Open Selenium Grid Dashboard at http://localhost:4444.
+9. Create a Java class named RemoteTest.
+10. Write a program using RemoteWebDriver.
+11. Execute the program and verify the browser result.
+2. Maven Dependency (pom.xml)
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sql</groupId>
+    <artifactId>SeleniumGrid</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.51.0</version>
+        </dependency>
+    </dependencies>
+
+</project>
+
+
+
+3. Hub Configuration
+Open Command Prompt in the Selenium Server JAR folder.
+
+Command:
+java -jar selenium-server-4.51.0.jar hub
+
+
+Hub URL:
+http://localhost:4444
+
+
+4. Node Configuration
+Open another Command Prompt.
+
+Command:
+java -jar selenium-server-4.51.0.jar node --hub http://localhost:4444
+
+
+Node URL:
+http://localhost:5555
+
+
+5. Java Program (RemoteTest.java)
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import java.net.URL;
+
+public class RemoteTest {
+
+    public static void main(String[] args) throws Exception {
+
+        ChromeOptions options = new ChromeOptions();
+
+        WebDriver driver = new RemoteWebDriver(
+            new URL("http://localhost:4444"),
+            options
+        );
+
+        driver.get("https://www.google.com");
+
+        System.out.println("Page Title: " + driver.getTitle());
+
+        System.out.println("Remote Execution Successful");
+
+        driver.quit();
+    }
+}
+
+
+
+6. Expected Output
+Page Title: Google
+Remote Execution Successful
